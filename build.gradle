@@ -1,0 +1,42 @@
+/*
+ *
+ * Copyright (c) 2019 Jalasoft.
+ *
+ * This software is the confidential and proprietary information of Jalasoft.
+ * ("Confidential Information"). You shall not
+ *  disclose such Confidential Information and shall use it only in
+ * accordance with the terms of the license agreement you entered into
+ *  with Jalasoft.
+ *
+ */
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'compress-service'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+    implementation 'org.apache.logging.log4j:log4j-core:2.12.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}
