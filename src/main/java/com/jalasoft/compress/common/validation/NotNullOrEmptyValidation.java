@@ -10,9 +10,9 @@
  *
  */
 
-package com.jalasoft.compress.validation;
+package com.jalasoft.compress.common.validation;
 
-import com.jalasoft.compress.exception.InvalidDataException;
+import com.jalasoft.compress.common.exception.InvalidDataException;
 
 public class NotNullOrEmptyValidation implements IValidationStrategy {
     private String value;

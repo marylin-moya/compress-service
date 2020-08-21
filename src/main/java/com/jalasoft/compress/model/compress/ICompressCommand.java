@@ -12,6 +12,9 @@
 
 package com.jalasoft.compress.model.compress;
 
+import com.jalasoft.compress.common.exception.InvalidDataException;
+import com.jalasoft.compress.model.entity.CompressCommand;
+
 public interface ICompressCommand {
-    public String build(CompressCommand compressCommand);
+    public String build(CompressCommand compressCommand) throws InvalidDataException;
 }

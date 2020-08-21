@@ -9,7 +9,7 @@
  *  with Jalasoft.
  *
  */
-package com.jalasoft.compress.exception;
+package com.jalasoft.compress.common.exception;
 
 public class ProcessException extends Exception {
     private static final String MESSAGE = "Error executing code.";

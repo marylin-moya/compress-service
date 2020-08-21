@@ -10,36 +10,29 @@
  *
  */
 
-package com.jalasoft.compress.model;
+package com.jalasoft.compress.model.compress;
 
-import com.jalasoft.compress.exception.ProcessException;
-import com.jalasoft.compress.model.compress.CompressCommand;
-import com.jalasoft.compress.model.compress.CompressManager;
-import com.jalasoft.compress.model.compress.ICompressCommand;
+import com.jalasoft.compress.common.exception.InvalidDataException;
+import com.jalasoft.compress.common.exception.ProcessException;
+import com.jalasoft.compress.common.utils.Constants;
+import com.jalasoft.compress.model.entity.CompressCommand;
 import com.jalasoft.compress.model.process.Process;
 import com.jalasoft.compress.model.process.ProcessManager;
 import com.jalasoft.compress.model.result.Result;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CompressFacade {
 
-
-
-    public static Result compress(List<String> files, String format) throws ProcessException {
-        String thirdPartyFolderPath = "D:\\OOP\\code\\compress-service\\third-party\\7zip\\";
-        String sourceFolderPath = "D:\\OOP\\code\\compress-service\\src\\main\\resources\\sourcePath\\";
-        String targetFolderPath = "D:\\OOP\\code\\compress-service\\src\\main\\resources\\targetPath\\";
+    public static Result compress(List<String> files, String format, String sourcePath,
+                                  String targetPath) throws ProcessException, InvalidDataException {
 
         CompressCommand compressCommand = new CompressCommand()
-                .setSevenZPath(thirdPartyFolderPath)
-                .setCommand("a")
-                //.setOptions(options)
+                .setCommand(Constants.COMPRESS_COMMAND)
                 .setFormat(format)
-                .setTargetPath(targetFolderPath)
+                .setTargetPath(targetPath)
                 .setArchiveName(files.get(0))
-                .setSourcePath(sourceFolderPath)
+                .setSourcePath(sourcePath)
                 .setFileNames(files);
 
         ProcessManager processManager = new ProcessManager();

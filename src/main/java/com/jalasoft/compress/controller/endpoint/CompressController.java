@@ -10,17 +10,18 @@
  *
  */
 
-package com.jalasoft.compress.controller;
+package com.jalasoft.compress.controller.endpoint;
 
+import com.jalasoft.compress.common.exception.FileException;
+import com.jalasoft.compress.common.exception.InvalidDataException;
+import com.jalasoft.compress.common.exception.ProcessException;
+import com.jalasoft.compress.common.utils.FileHelper;
+import com.jalasoft.compress.controller.entity.CompressParam;
 import com.jalasoft.compress.controller.response.ErrorResponse;
 import com.jalasoft.compress.controller.response.OKResponse;
 import com.jalasoft.compress.controller.response.Response;
-import com.jalasoft.compress.exception.FileException;
-import com.jalasoft.compress.exception.InvalidDataException;
-import com.jalasoft.compress.exception.ProcessException;
-import com.jalasoft.compress.model.CompressFacade;
+import com.jalasoft.compress.model.compress.CompressFacade;
 import com.jalasoft.compress.model.result.Result;
-import com.jalasoft.compress.utils.FileHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,24 +35,32 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.jalasoft.compress.common.utils.Constants.BASE_PATH;
+
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping(BASE_PATH)
 public class CompressController {
 
     @Value("${file.sourcePath}")
     private String sourcePath;
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    @Value("${file.targetPath}")
+    private String targetPath;
 
-    String thirdPartyFolderPath = "D:\\OOP\\code\\compress-service\\third-party\\7zip\\";
-    String sourceFolderPath = "D:\\OOP\\code\\compress-service\\src\\main\\resources\\sourcePath\\";
-    String targetFolderPath = "D:\\OOP\\code\\compress-service\\src\\main\\resources\\targetPath\\";
+    @Value("${server.address}")
+    private String serverAddress;
+
+    @Value("${server.port}")
+    private String serverPort;
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @PostMapping("/compress")
     public ResponseEntity<Response> execute(CompressParam compressParam) {
         LOGGER.info("/compress rest method starting...");
         Result result;
         try {
+            LOGGER.info("Validating Compress Params...");
             compressParam.validate();
 
             LOGGER.info("Getting Compress Params...");
@@ -71,9 +80,8 @@ public class CompressController {
             }
 
             List<String> files = multipartFiles.stream().map(file -> file.getOriginalFilename()).collect(Collectors.toList());
-            System.out.println(files.toString());
             LOGGER.info("Compressing {} files to {} format", files.size(), format);
-            result = CompressFacade.compress(files, format);
+            result = CompressFacade.compress(files, format, sourcePath, targetPath);
 
         } catch (InvalidDataException e) {
             return ResponseEntity.badRequest().body(
@@ -83,8 +91,11 @@ public class CompressController {
                     new ErrorResponse<Integer>(HttpServletResponse.SC_BAD_REQUEST, e.getMessage()));
         }
 
+        String downloadString = String.format("http://%s:%s%s/download/%s.%s", serverAddress, serverPort, BASE_PATH,
+                compressParam.getFiles().get(0).getOriginalFilename().replaceAll("\\.[^.]*$", ""),
+                compressParam.getFormat());
         return ResponseEntity.ok().body(
-                new OKResponse<Integer>(HttpServletResponse.SC_OK, result.getResultConsole())
+                new OKResponse<Integer>(HttpServletResponse.SC_OK, result.getResultConsole(), downloadString)
         );
     }
 }

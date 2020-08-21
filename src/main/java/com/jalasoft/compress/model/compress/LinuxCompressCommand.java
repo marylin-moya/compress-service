@@ -12,14 +12,20 @@
 
 package com.jalasoft.compress.model.compress;
 
+import com.jalasoft.compress.common.exception.InvalidDataException;
+import com.jalasoft.compress.common.utils.ConfigurationProperty;
+import com.jalasoft.compress.common.utils.Constants;
+import com.jalasoft.compress.model.entity.CompressCommand;
+
 public class LinuxCompressCommand implements ICompressCommand {
 
     @Override
-    public String build(CompressCommand compressCommand) {
+    public String build(CompressCommand compressCommand) throws InvalidDataException {
         String spaceBlank = " ";
         return new StringBuilder()
-                .append(compressCommand.sevenZPath)
-                .append("7za")
+                //.append(compressCommand.sevenZPath)
+                .append(ConfigurationProperty.getLinuxCompressToolPath())
+                .append(Constants.COMPRESS_LINUX_COMMAND)
                 .append(spaceBlank)
                 .append(compressCommand.command)
                 .append(spaceBlank)

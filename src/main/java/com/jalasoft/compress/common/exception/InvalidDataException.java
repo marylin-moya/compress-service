@@ -10,7 +10,7 @@
  *
  */
 
-package com.jalasoft.compress.exception;
+package com.jalasoft.compress.common.exception;
 
 public class InvalidDataException extends Exception {
     private static final String GENERAL_MESSAGE = "Invalid Parameter.";

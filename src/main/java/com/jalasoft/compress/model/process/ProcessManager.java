@@ -15,8 +15,8 @@ package com.jalasoft.compress.model.process;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static com.jalasoft.compress.utils.Constants.OS;
-import static com.jalasoft.compress.utils.Constants.OS_NAME_PROPERTY;
+import static com.jalasoft.compress.common.utils.Constants.OS;
+import static com.jalasoft.compress.common.utils.Constants.OS_NAME_PROPERTY;
 
 public class ProcessManager {
 

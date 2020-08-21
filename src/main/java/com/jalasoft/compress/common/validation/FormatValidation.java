@@ -10,27 +10,19 @@
  *
  */
 
-package com.jalasoft.compress.validation;
+package com.jalasoft.compress.common.validation;
 
-import com.jalasoft.compress.exception.InvalidDataException;
+import com.jalasoft.compress.common.exception.InvalidDataException;
+import com.jalasoft.compress.common.utils.ConfigurationProperty;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FormatValidation implements IValidationStrategy {
     private String format;
-    private List<String> FORMAT_LIST;
+    private List<String> FORMAT_LIST = ConfigurationProperty.getFormats();
 
     public FormatValidation(String format) throws InvalidDataException {
         this.format = format;
-        this.FORMAT_LIST = new ArrayList<String>() {
-            {
-                add("zip");
-                add("7z");
-                add("tar");
-            }
-        };
-        System.out.println(this.FORMAT_LIST.toString());
     }
 
     @Override

@@ -10,10 +10,10 @@
  *
  */
 
-package com.jalasoft.compress.controller;
+package com.jalasoft.compress.controller.entity;
 
-import com.jalasoft.compress.exception.InvalidDataException;
-import com.jalasoft.compress.validation.*;
+import com.jalasoft.compress.common.exception.InvalidDataException;
+import com.jalasoft.compress.common.validation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;

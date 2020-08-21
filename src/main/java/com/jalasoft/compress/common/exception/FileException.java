@@ -10,7 +10,7 @@
  *
  */
 
-package com.jalasoft.compress.exception;
+package com.jalasoft.compress.common.exception;
 
 public class FileException extends Exception {
     private static final String MESSAGE = "Error.";

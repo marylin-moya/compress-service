@@ -12,7 +12,7 @@
 
 package com.jalasoft.compress.model.process;
 
-import com.jalasoft.compress.exception.ProcessException;
+import com.jalasoft.compress.common.exception.ProcessException;
 import com.jalasoft.compress.model.result.Result;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

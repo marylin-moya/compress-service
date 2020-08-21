@@ -14,11 +14,13 @@ package com.jalasoft.compress.controller.response;
 
 public class OKResponse<T> extends com.jalasoft.compress.controller.response.Response {
     private String message;
-    private String pid;
 
-    public OKResponse(T status, String message) {
+    private String url;
+
+    public OKResponse(T status, String message, String url) {
         super(status);
         this.message = message;
+        this.url = url;
     }
 
     public String getMessage() {
@@ -27,5 +29,13 @@ public class OKResponse<T> extends com.jalasoft.compress.controller.response.Res
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

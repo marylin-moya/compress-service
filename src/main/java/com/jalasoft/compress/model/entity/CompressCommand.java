@@ -10,13 +10,12 @@
  *
  */
 
-package com.jalasoft.compress.model.compress;
+package com.jalasoft.compress.model.entity;
 
 import java.util.List;
 
 public class CompressCommand {
     public String command;
-    //public List<String> options;
     public String format;
     public String archiveName;
     public List<String> fileNames;
@@ -61,12 +60,6 @@ public class CompressCommand {
         this.sevenZPath = sevenZPath;
         return this;
     }
-    /*
-    public CompressCommandAbstract setOptions(List<String> options) {
-        this.options = options;
-        return this;
-    }
-    */
 
     /**
      * Getters
@@ -99,10 +92,4 @@ public class CompressCommand {
     public String getSevenZPath() {
         return sevenZPath;
     }
-
-    /*
-    public List<String> getOptions() {
-        return options;
-    }
-    */
 }
