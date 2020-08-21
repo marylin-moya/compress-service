@@ -1,0 +1,7 @@
+/.idea/*
+/.gradle/*
+/build/*
+/src/main/resources/sourcePath/*
+/src/main/resources/targetPath/*
+/gradle/*
+/gradlew*
